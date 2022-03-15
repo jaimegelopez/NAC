@@ -1,6 +1,6 @@
 function plot_hybrid_SC(sim_obj,par)
 
-%This script plots the output of a hybrid simulation
+%This script plots the output of the full metabolism model
 
 figure
 subplot(3,1,1);

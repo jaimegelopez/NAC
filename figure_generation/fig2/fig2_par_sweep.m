@@ -1,8 +1,10 @@
 function fig2_par_sweep(Fig2ax,linewidth,fontsize)
 
+%This script plots the mean growth and CVs for figure 2
+
 load('large_multicell_sweep.mat')
 
-max_growth = 25*100/(1+1);;
+max_growth = 25*100/(1+1);
 
 colors = [0 0 0;...
     230 159 0;...

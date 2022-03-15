@@ -1,3 +1,5 @@
+%This script plots the estimated budget loss for different AAs in E. coli
+
 clear;clc
 
 bdata = 'aa_analysis_data.mat';
@@ -17,7 +19,7 @@ ind = ~isnan(bvec);
 bvec = bvec(ind);
 gene_names = data.aa_triple(ind);
 
-%Plot
+%Plot budget loss
 bar(bvec,'FaceColor',[0.5,0.5,0.5])
 set(gca,'YScale','log')
 xticks(1:length(bvec))

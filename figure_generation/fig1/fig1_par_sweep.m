@@ -1,9 +1,10 @@
 function fig1_par_sweep(Fig1ax,linewidth,fontsize)
 
+%This script plots the mean growth part of figure 1
+
 load('large_single_cell_sweep.mat')
 
 max_growth = 25*100/(1+1);
-
 colors = [0 0 0;...
     230 159 0;...
     86 180 233;...
@@ -12,7 +13,7 @@ colors = [0 0 0;...
     213 94 0;...
     204 121 167]/255;
 
-%% Plot
+%Plot mean growth
 
 par_cell = {'P','beta'};
 label_cell = {{'Cell permeability, $P$'},'Burst size, $\beta$'};

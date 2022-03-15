@@ -1,6 +1,6 @@
 function RHS = hybrid_RHS(var,sim_obj,par)
 
-%This script computes the rates of deterministic reactions
+%This script computes the ODE RHS for the full metabolism model
 
 RHS = zeros(size(var));
 

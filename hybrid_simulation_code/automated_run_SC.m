@@ -1,10 +1,10 @@
 function automated_run_SC(table_file,id,results_folder)
 
-%This script runs a simulation based on parameters in a table, used
-%for parallel cluster jobs
+%This script runs the full metabolism model in an automated fashion
+%made to work with Slurm array jobs
 
-%Set seed according to id to ensure randomization
-rng(id)
+%Set seed with time to ensure randomization
+rng('shuffle')
 
 %Read in default parameter structure
 load('parameters/default_parameter_struct.mat');

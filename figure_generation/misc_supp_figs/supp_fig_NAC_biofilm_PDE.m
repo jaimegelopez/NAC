@@ -1,3 +1,6 @@
+%This script plots distribution of NAC metabolites within NAC sectors of
+%different lengths
+
 clear;clc
 
 D = 500; %microns^2/s

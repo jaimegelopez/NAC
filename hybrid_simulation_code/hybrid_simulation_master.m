@@ -1,7 +1,6 @@
-
 function sim_obj = hybrid_simulation_master(par)
 
-%Master script for hybrid stochastic cross-feeding simulation
+%This is the master script that runs the full metabolism model
 
 if ~isfield(par,'feedback')
     par.feedback = 1;
@@ -33,6 +32,8 @@ u = 0;
 
 tn = 1;
 burst_n = 1;
+sim_obj.initial_vars = sim_obj.var;
+sim_obj.initial_t = sim_obj.t;
 while u == 0
         
     %Set-up random variables and integrals for next Gillespie step
@@ -81,7 +82,7 @@ while u == 0
         if total_int == rand_int
             
             rates = hybrid_rates(sim_obj,par);
-            total_rate = sum(hybrid_rates(sim_obj,par));
+            total_rate = sum(rates);
             probs = rates/total_rate;
             cumulative_probs = cumsum(probs);
             reac_ind = find(cumulative_probs > rand_var,1,'first');
@@ -121,6 +122,7 @@ toc
 %Trim storage vectors
 sim_obj.record_var = sim_obj.record_var(:,1:(tn-1));
 sim_obj.record_t = sim_obj.record_t(1:(tn-1));
+sim_obj.burst_t = sim_obj.burst_t(1:(burst_n-1));
 
 %Get the growth integrals from the last three quarters
 sim_obj.growth_ints = zeros(par.N,1);
@@ -166,7 +168,6 @@ for i = 1:par.N
     sim_obj.m_means(i,:) = [m1_mean, m2_mean];
     sim_obj.m_varis(i,:) = [m1_vari, m2_vari];
     sim_obj.m_CV(i,:) = sqrt(sim_obj.m_varis(i,:))./sim_obj.m_means(i,:);
-    
     
 end
 

@@ -1,3 +1,5 @@
+%This script generates the data for figure 3
+
 clear;clc
 
 %% Generate distributions for varying CV and n

@@ -1,3 +1,5 @@
+%This script plots figure 3
+
 clear;clc
 
 newfigure(3.42/2, (2/3)*3.42/3*(3.5/2));
@@ -21,7 +23,7 @@ linewidth = 0.4;
 load('fig3_data.mat')
 
 
-%% Plot pdfs
+%% Plot pdfs of varying number of co-limiting metabolites
 axes(Fig3ax(2))
 pos = get(gca,'Position');
 pos(2) = 0.97*pos(2);
@@ -111,7 +113,7 @@ text(0.99,1.065+0.15,'1','Interpreter','latex','Units','normalized','FontSize',4
 ax = gca;
 ax.Clipping = 'off';
 
-%% Plot growth rate vs rho
+%% Plot growth rates for different metabolite correlations
 
 axes(Fig3ax(4))
 hold on
@@ -128,12 +130,9 @@ for i = 1:length(rho_vec)
 end
 
 ylim([0,1.1]);
-%yticks([0,0.5,1]);
 xlim([1,20])
 xticks([1,10,20])
 xticklabels({'1','10','20'})
-%yticklabels({'0','0.5','1'})
-%ylabel({'Mean relative', 'growth rate'},'FontSize',fontsize,'Interpreter','latex')
 xlabel('Number of metabolites','FontSize',fontsize,'Interpreter','latex')
 text(-0.15,1.1,'\textbf{D}','Interpreter','latex','Units','normalized','FontSize',4)
 set(gca,'TickLabelInterpreter','latex')

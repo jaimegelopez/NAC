@@ -1,6 +1,6 @@
 function sim_obj = construct_hybrid_simulation(par)
 
-%This script constructs the hybrid simulation object
+%This script constructs the simulation object for full metabolism model
 
 %Initialize time
 sim_obj.t = 0;
@@ -10,13 +10,29 @@ sim_obj.t = 0;
 ss_c = ceil((0.5*par.c*par.gamma*par.beta)/(1 + par.delta + par.P));
 ss_E = ceil(par.gamma*par.beta/2);
 var_vec = [ss_c; ss_c; ss_E; ss_E];
+
+%Randomize initial conditions if specified
+if isfield(par,'random_ICs')
+    if par.random_ICs
+        var_vec(3) = 2.*var_vec(3).*rand(1);
+    end
+end
+
+if ~isfield(par,'zero_outside')
+    par.zero_outside = 0;
+end
+
 if par.P == 0
     sim_obj.var = [0;0;repmat(var_vec,par.N,1)];
 else
-    sim_obj.var = [ss_c;ss_c;repmat(var_vec,par.N,1)];
+    if par.zero_outside  
+        sim_obj.var = [0;0;repmat(var_vec,par.N,1)];
+    else
+        sim_obj.var = [ss_c;ss_c;repmat(var_vec,par.N,1)];
+    end
 end
 
-%Set up variables
+%SET UP VARIABLEs
 %Type of compound, 1-metabolite, 2-enzyme
 var_id1_vec = [1;1;2;2];
 sim_obj.var_id1 = [1;1;repmat(var_id1_vec,par.N,1)];
@@ -36,16 +52,22 @@ sim_obj.E2_ind = (sim_obj.var_id1 == 2) & (sim_obj.var_id3 == 2) & (sim_obj.var_
 %Indices of reactions
 %cell index 1-N
 sim_obj.reac_id1 = repelem((1:par.N)',2);
-%reaction class index 1 - make
+%reaction class index 1 - make enzyme, expandable to many rxn classes
 sim_obj.reac_id2 = repmat([1;1],par.N,1);
-%type indices
+%type indices 
 sim_obj.reac_id3 = repmat([1;2],par.N,1);
 
 %Reaction matrix
 sim_obj.reac_matrix = zeros(length(sim_obj.reac_id1),length(sim_obj.var));
 for i = 1:length(sim_obj.reac_id1)
+    
+    %Find matching cell
     ind1 = sim_obj.var_id2 == sim_obj.reac_id1(i);
+    
+    %Find matching index
     ind2 = sim_obj.var_id3 == sim_obj.reac_id3(i);
+    
+    %Find enzymes ids
     ind3 = sim_obj.E1_ind | sim_obj.E2_ind;
 
     sim_obj.reac_matrix(i,ind1&ind2&ind3) = 1;

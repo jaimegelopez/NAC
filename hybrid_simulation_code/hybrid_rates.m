@@ -1,6 +1,6 @@
 function rates = hybrid_rates(sim_obj,par)
 
-%This script computes the rates of stochastic reactions
+%This script computes the stochastic process rates for the full model
 
 rates = zeros(size(sim_obj.reac_matrix,1),1);
 

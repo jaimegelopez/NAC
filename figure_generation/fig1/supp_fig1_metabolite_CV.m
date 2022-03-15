@@ -1,3 +1,5 @@
+%This script plots the metabolite CVs corresponding to figure 1
+
 %% Load data
 
 clear;clc
@@ -22,7 +24,7 @@ label_cell = {'Cell permeability, $P$'};
 n3 = 3;
 n1 = 40;
 
-%% Plot
+%% Plot CVs
 
 hold on
 for j = 1:n3

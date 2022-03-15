@@ -1,3 +1,6 @@
+%This script generates the enzyme timecourse supp figure corresponding to
+%the metabolite timecourses in figure 1
+
 clear;clc
 newfigure(3.42/2, (0.9/3)*3.42/3*(3.5/2));
 

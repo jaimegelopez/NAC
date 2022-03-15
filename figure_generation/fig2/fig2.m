@@ -1,3 +1,5 @@
+%This script generates figure 2
+
 clear;clc
 
 newfigure(3.42/2, (2.3/3)*3.42/3*(3.5/2));

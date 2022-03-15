@@ -1,6 +1,7 @@
 function results_table = aggregate_SC_results(sim_name,parts,m_data)
 
-%This script aggregates the result of parallel cluster jobs
+%This script aggregrates results from automated runs of the full metabolite
+%model
 
 if ~exist('parts')
     parts = [];
@@ -11,8 +12,8 @@ if ~exist('m_data')
 end
 
 %Generate file and folder names
-results_dir = ['automated_runs/results/',sim_name,'/'];
-par_file = ['automated_runs/parameters/',sim_name,'.csv'];
+results_dir = ['/home/jglopez/research/stochastic_crossfeeding/automated_runs/results/',sim_name,'/'];
+par_file = ['/home/jglopez/research/stochastic_crossfeeding/automated_runs/parameters/',sim_name,'.csv'];
 
 %Read results table
 results_table = readtable(par_file,'ReadRowNames',false,...
@@ -21,10 +22,10 @@ results_table = readtable(par_file,'ReadRowNames',false,...
 %Make new columns
 results_table.mean_growth = nan(size(results_table.id));
 results_table.std_growth = nan(size(results_table.id));
-results_table.E_mean = nan(size(results_table.id));
-results_table.E_vari = nan(size(results_table.id));
-results_table.E_cov = nan(size(results_table.id));
-results_table.E_CV = nan(size(results_table.id));
+results_table.m_mean = nan(size(results_table.id));
+results_table.m_vari = nan(size(results_table.id));
+results_table.m_cov = nan(size(results_table.id));
+results_table.m_CV = nan(size(results_table.id));
 
 %Loop through and get data
 
