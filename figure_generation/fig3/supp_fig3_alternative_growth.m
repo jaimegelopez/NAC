@@ -1,4 +1,4 @@
-%This script look at mean growth behavior for an alternative growth
+%This script looks at mean growth behavior for an alternative growth
 %function. 
 
 clear;clc
